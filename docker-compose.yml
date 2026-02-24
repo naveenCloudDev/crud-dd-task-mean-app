@@ -1,10 +1,19 @@
 version: '3'
 
 services:
+  mongodb:
+    image: mongo:6
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    restart: always
+
   backend:
     build: ./backend
     ports:
       - "5000:5000"
+    depends_on:
+      - mongodb
     restart: always
 
   frontend:
